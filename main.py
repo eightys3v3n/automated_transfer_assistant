@@ -1,43 +1,8 @@
-
 from datetime import timedelta, datetime
 from data import *
+from database import *
+from data_structures import *
 
-
-def next_of_recurring(recurring, now=None):
-  # Returns the date of the next occurance
-  if now is None:
-    now = datetime.today()
-
-  last_occurance = last_of_recurring(recurring, now=now)
-
-  if recurring.frequency_unit == Unit.Days:
-    next_occurance = last_occurance + timedelta(days=recurring.frequency)
-    return next_occurance
-
-  else:
-    raise NotImplemented()
-
-Recurring.next = next_of_recurring
-
-def last_of_recurring(recurring, now=None):
-  # Returns the date of the most recent previous occurance
-  if now is None:
-    now = today()
-
-  if recurring.frequency_unit == Unit.Days:
-    days_since_start = now - recurring.start_date
-    occurances_since = days_since_start.days // recurring.frequency
-    last_occurance = recurring.start_date + timedelta(days=occurances_since * recurring.frequency)
-    return last_occurance
-
-  else:
-    raise NotImplemented()
-Recurring.last = last_of_recurring
-
-
-def first_paycheque_after_expense(expense):
-  # returns the first paycheque date after a given recurring expense
-  pass
 
 
 
@@ -46,20 +11,7 @@ def latest_balance():
   pass
 
 
-def add_recurring_expense(
-    start_date     = None,
-    frequency      = None,
-    frequency_unit = None,
-    amount         = None
-  ):
-  # Adds a recurring expense
-  expense = RecurringExpense(
-    start_date,
-    frequency,
-    frequency_unit,
-    amount
-  )
-
+def generate_recurring_transfer(expense):
   # Allocate money from paycheque
   expense.transfers.append(
     RecurringTransfer(
@@ -83,14 +35,3 @@ def add_recurring_expense(
       to_account     = Account.CreditCard
     )
   )
-
-
-def generate_recurring_transfer():
-  # Uses a recurring expense to generate all required recurring transfers
-  #frequency = every payqueque
-  #frequency_unit = every payqueque
-
-  #Start date = first paycheque after expense start date
-
-  #amount = divide expense amount by frequency into max number of days in a year. multiply that by max number of days in this frequency
-  pass
