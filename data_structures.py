@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import config
+from data import Paycheque
 
 
 class Unit(Enum):
@@ -45,20 +46,6 @@ class RecurringTransfer(Recurring):
   pass
 
 # Can be daily, weekly, bi-weekly, monthly, yearly, monthend
-
-
-Paycheque = Recurring(
-  start_date=datetime(2022, 2, 25),
-  frequency=14,
-  frequency_unit=Unit.Days,
-  amount=300
-)
-# Feb 15, 339.8
-# Jan 31, 381.25
-# 15th and last day of the month.
-# Effectively every 13-16 days -_-
-# >= $300
-# So paid $300 every two weeks on (Friday?)
 
 
 
@@ -118,7 +105,3 @@ def last_of_recurring(recurring, now=None):
   else:
     raise NotImplemented()
 Recurring.last = last_of_recurring
-
-
-def next_paycheque_after_expense(expense):
-  return next_of_recurring(paycheque, next_of_recurring(expense))

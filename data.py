@@ -1,6 +1,23 @@
 from database import *
 
 
+
+Paycheque = Recurring(
+  start_date=datetime(2022, 2, 25),
+  frequency=14,
+  frequency_unit=Unit.Days,
+  amount=300
+)
+# Shaw contractor
+# Feb 15, 339.8
+# Jan 31, 381.25
+# 15th and last day of the month.
+# Effectively every 13-16 days -_-
+# >= $300
+# So paid $300 every two weeks on (Friday?)
+
+
+
 expenses = [
   { name="Podcast Addict",
     start_date     = datetime(2021, 2, 22),

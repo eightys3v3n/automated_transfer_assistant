@@ -11,7 +11,7 @@ def latest_balance():
   pass
 
 
-def generate_recurring_transfer(expense):
+def generate_transfer(expense):
   # Allocate money from paycheque
   expense.transfers.append(
     RecurringTransfer(
